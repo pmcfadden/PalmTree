@@ -35,5 +35,4 @@ group :test do
   gem 'turn', :require => false
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl_rails'
 end
