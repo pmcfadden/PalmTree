@@ -1,0 +1,7 @@
+#content
+  %h1 Current Surveys
+  -@surveys.each do |survey|
+    .survey-date
+      =link_to "#{survey.date_of_survey.strftime('%B %Y')}", survey
+
+  =link_to 'Create a new survey', new_survey_path
