@@ -24,3 +24,14 @@ describe Survey do
     @survey.should respond_to(:questions)
   end
 end
+
+# == Schema Information
+#
+# Table name: surveys
+#
+#  id             :integer         not null, primary key
+#  date_of_survey :date
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
