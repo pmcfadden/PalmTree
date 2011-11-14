@@ -22,6 +22,11 @@ describe Project do
     @project.contact_email = "correct@format.com"
     @project.should be_valid
   end
+
+  it "should require a contact name" do
+    @project.contact_name = nil
+    @project.should_not be_valid
+  end
 end
 
 # == Schema Information

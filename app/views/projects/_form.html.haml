@@ -1,0 +1,12 @@
+= form_for(@project) do |f|
+  %div.field
+    = f.label :project_name
+    = f.text_field :project_name
+  %div.field
+    = f.label :contact_email
+    = f.text_field :contact_email
+  %div.field
+    = f.label :contact_name
+    = f.text_field :contact_name
+  %div.submit_button
+    = f.submit

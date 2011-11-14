@@ -7,7 +7,7 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class Project < ActiveRecord::Base
-  validates :project_name, :presence => true
+  validates :project_name, :contact_name, :presence => true
   validates :contact_email, :presence => true, :email => true
 end
 

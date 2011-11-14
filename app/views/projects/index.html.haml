@@ -1,0 +1,23 @@
+%h1
+  Projects
+
+%table#all_projects
+  %tr
+    %th
+      Project Name
+    %th
+      Contact Name
+    %th
+      Contact E-Mail
+  -@projects.each do |project|
+    %tr{:id => "#{project.project_name}"}
+      %td.project_name
+        = link_to project.project_name, project
+      %td#contact_name
+        = project.contact_name
+      %td#contact_email
+        = project.contact_email
+
+%br/
+#new_link
+  = link_to 'New Project', new_project_path 
