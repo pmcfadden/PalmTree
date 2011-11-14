@@ -8,5 +8,6 @@ class SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
+    @questions = Question.find(:all, :conditions => ["survey_id = ?", params[:id]])
   end
 end

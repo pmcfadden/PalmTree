@@ -1,0 +1,20 @@
+= form_for(@question) do |f|
+  - if @question.errors.any?
+    %div#error_explanation
+      %h2
+        = pluralize(@question.errors.count, "error") 
+        prohibited this question from being saved:
+
+      %ul
+        -@question.errors.full_messages.each do |msg|
+          %li
+            = msg
+
+  %div.field
+    = f.label :question_text
+    = f.text_field :question_text
+  %div.field
+    = f.label :survey_id
+    = f.number_field :survey_id
+  %div.actions
+    = f.submit

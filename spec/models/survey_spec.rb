@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe Survey do
-  it "should know the month it will be used for" do
+  before(:each) do
+    @survey = FactoryGirl.build(:survey)
+  end
+  it "should know the month day and year it will be used for" do
     survey = Survey.new
     survey.date_of_survey = "01/05/2011".to_date
     survey.date_of_survey.month.should == 5
@@ -10,7 +13,14 @@ describe Survey do
   end
 
   it "should require a date_of_survey" do
-    Survey.new.should_not be_valid
-    FactoryGirl.build(:survey).should be_valid
+    @survey.date_of_survey = nil
+    @survey.should_not be_valid
+    
+    @survey.date_of_survey = "01/05/2011".to_date
+    @survey.should be_valid
+  end
+
+  it "should have questions associated with it" do
+    @survey.should respond_to(:questions)
   end
 end

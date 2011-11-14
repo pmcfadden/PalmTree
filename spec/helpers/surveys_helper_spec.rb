@@ -11,4 +11,11 @@ require 'spec_helper'
 #   end
 # end
 describe SurveysHelper do
+  describe "format month and year" do
+    it "should format the survey date to only be a month and year" do
+      survey = Survey.new
+      survey.date_of_survey = "01/05/2011"
+      helper.format_month_and_year(survey).should == "May 2011"
+    end
+  end
 end

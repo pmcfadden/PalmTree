@@ -1,3 +1,13 @@
 #content
-  %h1
+  %h1#page-title
     = format_month_and_year(@survey)
+  = form_tag do
+    - @questions.each do |question|
+      .question-text
+        = question.question_text
+      .question-response
+        %select
+          %option Red
+          %option Yellow
+          %option Green
+    %button#submit-button Submit
