@@ -43,43 +43,6 @@ describe QuestionsController do
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Question" do
-        expect {
-          post :create, :question => valid_attributes
-        }.to change(Question, :count).by(1)
-      end
-
-      it "assigns a newly created question as @question" do
-        post :create, :question => valid_attributes
-        assigns(:question).should be_a(Question)
-        assigns(:question).should be_persisted
-      end
-
-      it "redirects to the created question" do
-        post :create, :question => valid_attributes
-        response.should redirect_to(Question.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved question as @question" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Question.any_instance.stub(:save).and_return(false)
-        post :create, :question => {}
-        assigns(:question).should be_a_new(Question)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Question.any_instance.stub(:save).and_return(false)
-        post :create, :question => {}
-        response.should render_template("new")
-      end
-    end
-  end
-
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested question" do

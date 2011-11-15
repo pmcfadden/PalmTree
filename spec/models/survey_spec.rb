@@ -23,7 +23,13 @@ describe Survey do
   it "should have questions associated with it" do
     @survey.should respond_to(:questions)
   end
+
+  it "should need to be associated with a project" do
+    @survey.project_id = nil
+    @survey.should_not be_valid
+  end
 end
+
 
 # == Schema Information
 #
@@ -33,5 +39,6 @@ end
 #  date_of_survey :date
 #  created_at     :datetime
 #  updated_at     :datetime
+#  project_id     :integer
 #
 

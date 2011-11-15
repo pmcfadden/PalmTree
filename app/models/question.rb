@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
   validates_presence_of :question_text, :survey_id
-  belongs_to :surveys
+  has_one :response
+  belongs_to :survey
 end
 
 # == Schema Information

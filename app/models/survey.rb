@@ -1,7 +1,9 @@
 class Survey < ActiveRecord::Base
-  validates_presence_of :date_of_survey
+  validates_presence_of :date_of_survey, :project_id
   has_many :questions
+  belongs_to :project
 end
+
 
 # == Schema Information
 #
@@ -11,5 +13,6 @@ end
 #  date_of_survey :date
 #  created_at     :datetime
 #  updated_at     :datetime
+#  project_id     :integer
 #
 

@@ -9,6 +9,7 @@ end
 class Project < ActiveRecord::Base
   validates :project_name, :contact_name, :presence => true
   validates :contact_email, :presence => true, :email => true
+  has_many :surveys
 end
 
 # == Schema Information

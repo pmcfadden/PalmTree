@@ -1,2 +1,9 @@
 %h1
   =@project.project_name
+%table
+  -@project.surveys.each do |survey|
+    %tr.survey
+      %td.survey_date
+        = format_month_and_year(survey)
+      %td.survey_edit_link
+        = link_to "Edit", survey

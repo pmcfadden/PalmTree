@@ -27,6 +27,10 @@ describe Project do
     @project.contact_name = nil
     @project.should_not be_valid
   end
+
+  it "should be able to have associated surveys" do
+    @project.should respond_to(:surveys)
+  end
 end
 
 # == Schema Information

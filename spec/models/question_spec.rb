@@ -21,6 +21,10 @@ describe Question do
     @question.survey_id = 1
     @question.should be_valid
   end
+
+  it "should have a response associated with it" do
+    @question.should respond_to(:response)
+  end
 end
 
 # == Schema Information

@@ -13,8 +13,7 @@
   %div.field
     = f.label :question_text
     = f.text_field :question_text
-  %div.field
-    = f.label :survey_id
-    = f.number_field :survey_id
+
+  = hidden_field(:question, :survey_id, :value => "#{params[:id]}")
   %div.actions
     = f.submit
