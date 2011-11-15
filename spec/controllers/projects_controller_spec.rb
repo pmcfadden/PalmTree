@@ -41,5 +41,13 @@ describe ProjectsController do
         }.to change(Project, :count).by(1)
       end
     end
+
+    describe "with invalid params" do
+      it "should stay on the create a new project page" do
+        Project.any_instance.stub(:save).and_return(false)
+        post :create, :project => valid_attributes
+        response.should render_template("new")
+      end
+    end
   end
 end

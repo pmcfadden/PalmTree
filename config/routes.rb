@@ -1,9 +1,10 @@
 PalmTree::Application.routes.draw do
 
   # The priority is based upon order of creation:
-  # first created -> highest priority.
+  # first created -> highest priority.priority
 
-  resources :surveys, :questions, :projects
+  match 'surveys/respond/:id', :to => 'surveys#respond'
+  resources :surveys, :questions, :projects, :responses
 
   root :to => 'projects#index'
 
@@ -50,10 +51,6 @@ PalmTree::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

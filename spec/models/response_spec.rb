@@ -7,6 +7,7 @@ describe Response do
   it "should be associated with a question" do
     @response.question_id = nil
     @response.should_not be_valid
+    @response.should respond_to(:question)
   end
 end
 

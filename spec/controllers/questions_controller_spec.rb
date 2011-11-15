@@ -12,6 +12,7 @@ describe QuestionsController do
     }
   end
 
+
   describe "GET index" do
     it "assigns all questions as @questions" do
       question = Question.create! valid_attributes
