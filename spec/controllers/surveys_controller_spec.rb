@@ -1,12 +1,6 @@
 require 'spec_helper'
 
 describe SurveysController do
-  def valid_attributes
-    {
-      :date_of_survey => "01/05/2011".to_date,
-      :project_id => 1
-    }
-  end
   it "should be able to view all surveys" do
     get :index
     response.should be_success
@@ -19,7 +13,7 @@ describe SurveysController do
 
   describe "GET show" do
     it "assigns the requested survey as @survey" do
-      survey = Survey.create! valid_attributes
+      survey = FactoryGirl.create(:survey)
       get :show, :id => survey.id
       assigns(:survey).should eq(survey)
     end
@@ -28,7 +22,7 @@ describe SurveysController do
   describe "GET respond" do
     it "assigns all questions as @questions" do
       stubbed_questions = [FactoryGirl.create(:question), FactoryGirl.create(:question)]
-      survey = Survey.create! valid_attributes
+      survey = FactoryGirl.create(:survey)
       Survey.any_instance.stub(:questions).and_return(stubbed_questions)
       get :respond, :id => survey.id
       assigns(:questions).should eq(stubbed_questions)

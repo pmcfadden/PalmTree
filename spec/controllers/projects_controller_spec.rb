@@ -1,18 +1,17 @@
 require 'spec_helper'
 
 describe ProjectsController do
-
   def valid_attributes
     {
-      :project_name => 'my project',
-      :contact_email => 'test@example.com',
-      :contact_name => 'patrick m'
+      :project_name => "My Project",
+      :contact_email => "pat@example.com",
+      :contact_name => "patrick"
     }
   end
 
   describe "GET index" do
     it "assigns all projects as @projects" do
-      project = Project.create! valid_attributes
+      project = FactoryGirl.create(:project)
       get :index
       assigns(:projects).should eq([project])
     end
@@ -20,7 +19,7 @@ describe ProjectsController do
 
   describe "GET show" do
     it "assigns the requested project as @project" do
-      project = Project.create! valid_attributes
+      project = FactoryGirl.create(:project)
       get :show, :id => project.id
       assigns(:project).should eq(project)
     end
