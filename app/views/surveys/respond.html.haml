@@ -1,0 +1,26 @@
+%h1
+  = format_month_and_year(@survey)
+
+%table
+  - @questions.each do |question|
+    %tr.question
+      %td
+        = question.question_text
+    %tr.response
+      %td
+        -if question.question_type == "Rating"
+          %select.red_yellow_green_select
+            %option
+              Red
+            %option
+              Amber
+            %option
+              Green
+        -elsif question.question_type == "Boolean"
+          %select.yes_no_select
+            %option
+              No
+            %option
+              Yes
+        -else
+          %input.free_response

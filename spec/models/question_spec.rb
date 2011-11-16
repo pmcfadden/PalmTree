@@ -22,10 +22,36 @@ describe Question do
     @question.should be_valid
   end
 
+  it "should require a question_type to be valid" do
+    @question.question_type = nil
+    @question.should_not be_valid
+    
+    @question.question_type = "Rating"
+    @question.should be_valid
+  end
+
   it "should have a response associated with it" do
     @question.should respond_to(:response)
   end
+
+  describe "question_type" do
+    it "should only allow Rating, Free, and Boolean" do
+      @question.question_type = "not allowed"
+      @question.should_not be_valid
+
+      @question.question_type = "Rating"
+      @question.should be_valid
+
+      @question.question_type = "Free"
+      @question.should be_valid
+
+      @question.question_type = "Boolean"
+      @question.should be_valid
+    end
+  end
+
 end
+
 
 # == Schema Information
 #
@@ -36,5 +62,6 @@ end
 #  survey_id     :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  question_type :string(255)     default("Rating")
 #
 
