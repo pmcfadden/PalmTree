@@ -28,6 +28,10 @@ describe Survey do
     @survey.project_id = nil
     @survey.should_not be_valid
   end
+
+  it "should have a survey_response" do
+    @survey.should respond_to(:survey_response)
+  end
 end
 
 
