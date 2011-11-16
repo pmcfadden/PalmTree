@@ -3,7 +3,7 @@ PalmTree::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.priority
 
-  match 'surveys/respond/:id', :to => 'surveys#respond'
+  match 'surveys/:id/respond', :to => 'surveys#respond'
   resources :surveys, :questions, :projects, :responses
 
   root :to => 'projects#index'

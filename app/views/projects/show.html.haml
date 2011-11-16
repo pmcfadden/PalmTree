@@ -5,5 +5,7 @@
     %tr.survey
       %td.survey_date
         = format_month_and_year(survey)
+      %td.survey_respond_link
+        = link_to "Respond", :controller => "surveys", :action => "respond"
       %td.survey_edit_link
         = link_to "Edit", survey
