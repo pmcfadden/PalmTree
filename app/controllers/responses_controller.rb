@@ -1,9 +1,5 @@
 class ResponsesController < ApplicationController
 
-  def show
-    @survey_response = Response.find(params[:id])
-  end
-
   def update
     @response = Response.find(params[:id])
     if @response.update_attributes(params[:response])

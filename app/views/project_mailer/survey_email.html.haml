@@ -1,0 +1,5 @@
+%h1
+  Hello 
+  =@project.contact_name
+=@project.project_name
+=url_for(:host => 'localhost:3000', :controller => 'surveys', :action => 'respond', :id =>@project.surveys[0])

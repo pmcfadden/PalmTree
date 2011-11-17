@@ -19,4 +19,12 @@ class ProjectsController < ApplicationController
       render action: "new"
     end
   end
+
+  def send_email
+    @projects = Project.all
+    @projects.each do |project|
+      ProjectMailer.survey_email(project).deliver
+    end
+    redirect_to :root
+  end
 end
