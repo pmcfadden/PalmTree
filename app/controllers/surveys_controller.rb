@@ -20,7 +20,8 @@ class SurveysController < ApplicationController
   end
 
   def create
-    @survey = Survey.new(:survey)
+    date = Date.new(params[:survey["date_of_survey(1i)"]].to_i, params[:survey["date_of_survey(2i)"]].to_i, params[:survey["date_of_survey(3i)"]].to_i)
+    @survey = Survey.new(:date_of_survey => date)
 
     if @survey.save
       redirect_to @survey

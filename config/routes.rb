@@ -4,7 +4,8 @@ PalmTree::Application.routes.draw do
   # first created -> highest priority.priority
 
   match 'surveys/:id/respond', :to => 'surveys#respond'
-  resources :surveys, :questions, :projects, :responses
+  match 'responses/update_individual', :to => 'responses#update_individual'
+  resources :surveys, :questions, :projects
 
   root :to => 'projects#index'
 

@@ -1,17 +1,20 @@
 %h1
   = format_month_and_year(@survey)
 
-%table
-  - @responses.each do |response|
-    - fields_for "response[]", response do |f|
-      %tr.question
-        %td
-          = response.question.question_text
-      %tr.response
-        %td
-          -if response.question.question_type == "Rating"
-            = f.select("question_response", {"Red" => "Red", "Amber" => "Amber", "Green" => "Green"})
-          -elsif response.question.question_type == "Boolean"
-            = f.select("question_response", {"Yes" => "Yes", "No" => "No"})
-          -else
-            = f.text_field :response
+= form_tag responses_update_individual_path, :method => :put do
+  =hidden_field_tag 'survey_id', @survey.project.id
+  %table.responses
+    - for response in @responses
+      =fields_for "responses[]", response do |f|
+        %tr.question_and_response
+          %td
+            = f.label response.question.question_text
+            -if response.question.question_type == "Rating"
+              = f.select(:question_response, %w{Red Amber Green}, {:include_blank => 'Please Select'}) 
+              = f.text_field(:response_explanation)
+            -elsif response.question.question_type == "Boolean"
+              = f.select(:question_response, %w{Yes No})
+              = f.text_field(:response_explanation)
+            -else
+              = text_field :response
+  =submit_tag

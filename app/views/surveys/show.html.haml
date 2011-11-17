@@ -1,6 +1,8 @@
 #content
   %h1#page-title
     = format_month_and_year(@survey)
+  #notice
+    =notice
   - @questions.each do |question|
     .question-text
       = question.question_text

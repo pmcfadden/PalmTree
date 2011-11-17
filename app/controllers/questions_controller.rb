@@ -41,15 +41,15 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
-    @response = Response.new(:question_id => @question.id)
 
     respond_to do |format|
-      if @question.save and @response.save
+      if @question.save
+        @response = Response.new(:question_id => @question.id)
+        @response.save
         format.html { redirect_to Survey.find(@question.survey_id), notice: 'Question was successfully created.' }
         format.json { render json: @question, status: :created, location: @question }
       else
-#        format.html { redirect_to :controller => "survey", :action => "show"} 
-        format.html {redirect_to Survey.find(@question.survey_id)}
+        format.html {redirect_to Survey.find(@question.survey_id), notice: 'Question was not successfully created.'}
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
