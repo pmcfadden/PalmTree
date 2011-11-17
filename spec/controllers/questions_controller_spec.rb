@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe QuestionsController do
+  def valid_attributes
+    {
+      :question_text => "this is text",
+      :survey_id => 1,
+      :question_type => "Rating"
+    }
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to

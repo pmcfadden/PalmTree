@@ -29,8 +29,8 @@ describe Survey do
     @survey.should_not be_valid
   end
 
-  it "should have a survey_response" do
-    @survey.should respond_to(:survey_response)
+  it "should associate to responses" do
+    @survey.should respond_to(:responses)
   end
 end
 

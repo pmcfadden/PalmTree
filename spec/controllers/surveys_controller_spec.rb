@@ -27,5 +27,12 @@ describe SurveysController do
       get :respond, :id => survey.id
       assigns(:questions).should eq(stubbed_questions)
     end
+    it "assigns all responses as @responses" do
+      stubbed_responses = [FactoryGirl.create(:response), FactoryGirl.create(:response)]
+      survey = FactoryGirl.create(:survey)
+      Survey.any_instance.stub(:responses).and_return(stubbed_responses)
+      get :respond, :id => survey.id
+      assigns(:responses).should eq(stubbed_responses)
+    end
   end
 end

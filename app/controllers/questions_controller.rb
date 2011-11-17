@@ -41,9 +41,10 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
+    @response = Response.new(:question_id => @question.id)
 
     respond_to do |format|
-      if @question.save
+      if @question.save and @response.save
         format.html { redirect_to Survey.find(@question.survey_id), notice: 'Question was successfully created.' }
         format.json { render json: @question, status: :created, location: @question }
       else

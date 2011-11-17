@@ -1,0 +1,7 @@
+= form_for(@survey) do |f|
+  %div.survey_date
+    = f.label :date_of_survey
+    = f.date_select('survey', 'date')
+
+  %div#submit
+    = f.submit

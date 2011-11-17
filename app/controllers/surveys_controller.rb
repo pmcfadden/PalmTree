@@ -4,6 +4,7 @@ class SurveysController < ApplicationController
   end
 
   def new
+    @survey = Survey.new
   end
 
   def show
@@ -15,5 +16,16 @@ class SurveysController < ApplicationController
   def respond
     @survey = Survey.find(params[:id])
     @questions = @survey.questions
+    @responses = @survey.responses
+  end
+
+  def create
+    @survey = Survey.new(:survey)
+
+    if @survey.save
+      redirect_to @survey
+    else
+      render action: "new"
+    end
   end
 end

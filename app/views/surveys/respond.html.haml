@@ -2,25 +2,16 @@
   = format_month_and_year(@survey)
 
 %table
-  - @questions.each do |question|
-    %tr.question
-      %td
-        = question.question_text
-    %tr.response
-      %td
-        -if question.question_type == "Rating"
-          %select.red_yellow_green_select
-            %option
-              Red
-            %option
-              Amber
-            %option
-              Green
-        -elsif question.question_type == "Boolean"
-          %select.yes_no_select
-            %option
-              No
-            %option
-              Yes
-        -else
-          %input.free_response
+  - @responses.each do |response|
+    - fields_for "response[]", response do |f|
+      %tr.question
+        %td
+          = response.question.question_text
+      %tr.response
+        %td
+          -if response.question.question_type == "Rating"
+            = f.select("question_response", {"Red" => "Red", "Amber" => "Amber", "Green" => "Green"})
+          -elsif response.question.question_type == "Boolean"
+            = f.select("question_response", {"Yes" => "Yes", "No" => "No"})
+          -else
+            = f.text_field :response

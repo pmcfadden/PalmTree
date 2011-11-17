@@ -1,6 +1,7 @@
 class Response < ActiveRecord::Base
   validates :question_id, :presence => true
   belongs_to :question
+  belongs_to :survey
 end
 
 # == Schema Information

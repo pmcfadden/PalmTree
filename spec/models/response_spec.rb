@@ -9,6 +9,10 @@ describe Response do
     @response.should_not be_valid
     @response.should respond_to(:question)
   end
+
+  it "should be associated with a survey" do
+    @response.should respond_to(:survey)
+  end
 end
 
 # == Schema Information
