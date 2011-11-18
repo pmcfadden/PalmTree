@@ -31,7 +31,12 @@ describe Project do
   it "should be able to have associated surveys" do
     @project.should respond_to(:surveys)
   end
+
+  it "should be associated with an account" do
+    @project.should respond_to(:account)
+  end
 end
+
 
 # == Schema Information
 #
@@ -43,5 +48,6 @@ end
 #  contact_name  :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  account_id    :integer
 #
 

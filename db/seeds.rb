@@ -5,8 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Project.create(project_name: "Fitness 2", contact_email: "pmcfadde@thoughtworks.com", contact_name: "patrick")
-Project.create(project_name: "Loyalty R2", contact_email: "pmcfadde@thoughtworks.com", contact_name: "mike")
+Account.create(account_name: "ThoughtWorks", account_contact: "pemcfadden@gmail.com")
+Account.create(account_name: "Studios", account_contact: "pemcfadden@gmail.com")
+Project.create(project_name: "Fitness 2", contact_email: "pmcfadde@thoughtworks.com", contact_name: "patrick", project_id: 1)
+Project.create(project_name: "Loyalty R2", contact_email: "pmcfadde@thoughtworks.com", contact_name: "mike", project_id: 2)
 Survey.create(date_of_survey: "01/06/2011".to_date, project_id: 2)
 Survey.create(date_of_survey: "01/05/2011".to_date, project_id: 1)
 Question.create(question_text: "this is a question for first survey", survey_id: 1, question_type: "Rating") 
