@@ -31,6 +31,7 @@ gem 'jquery-rails'
 group :test, :development do
   gem 'guard'
   gem 'guard-rspec'
+  gem 'growl_notify'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'simplecov'

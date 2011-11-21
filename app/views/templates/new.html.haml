@@ -1,0 +1,7 @@
+%h1
+  Create Survey Template
+
+=form_for(@template) do |f|
+  = f.label :date_of_survey
+  = f.date_select :date_of_survey
+  = f.submit
