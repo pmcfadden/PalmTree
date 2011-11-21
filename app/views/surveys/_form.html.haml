@@ -1,4 +1,4 @@
-= form_for(@survey) do |f|
+= form_for([@project, @survey]) do |f|
   %div.survey_date
     = f.label :date_of_survey
     = f.date_select :date_of_survey

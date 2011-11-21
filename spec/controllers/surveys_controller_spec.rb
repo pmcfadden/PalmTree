@@ -1,21 +1,63 @@
 require 'spec_helper'
 
 describe SurveysController do
-  it "should be able to view all surveys" do
-    get :index
-    response.should be_success
+  before(:each) do
+    @project = FactoryGirl.create(:project)
   end
 
-  it "should be able to create a survey" do
-    get :new
-    response.should be_success
+  describe "GET new" do
+    before(:each) do
+      get :new, :project_id => @project.id
+    end
+
+    it "should be able to create a survey" do
+      response.should be_success
+    end
+
+    it "should assign the project as @project" do
+      assigns(:project).should == @project
+    end
+
+    it "should associate the new survey to the project" do
+      assigns(:survey).project.should == @project
+    end
   end
 
   describe "GET show" do
     it "assigns the requested survey as @survey" do
       survey = FactoryGirl.create(:survey)
-      get :show, :id => survey.id
-      assigns(:survey).should eq(survey)
+      get :show, :id => survey.id, :project_id => @project.id
+      assigns(:survey).should == survey
+    end
+  end
+
+  describe "POST create" do
+    before(:each) do
+      post :create, :project_id => @project.id, :survey => {"date_of_survey(1i)" => "2001", "date_of_survey(2i)" => "12", "date_of_survey(3i)" => "1"}
+    end
+
+    it "should assign the project as @project" do
+      assigns(:project).should == @project
+    end
+
+    it "should save project as an association to the survey" do
+      assigns(:survey).project.should == @project
+    end
+
+    it "should redirect to project show page on success" do
+      response.should redirect_to(@project)
+    end
+
+    it "should save the date on the survey" do
+      assigns(:survey).date_of_survey.should == Date.civil(2001, 12, 1)
+    end
+  end
+
+  describe 'unsuccessful create' do
+    it "should render the new page on unsuccessful save" do
+      Survey.any_instance.stub(:save).and_return(false)
+      post :create, :project_id => @project.id, :survey => {"date_of_survey(1i)" => "2001", "date_of_survey(2i)" => "12", "date_of_survey(3i)" => "1"}
+      response.should render_template(:new)
     end
   end
 
