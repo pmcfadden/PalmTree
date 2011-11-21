@@ -39,14 +39,16 @@ describe Account do
   end
 end
 
+
 # == Schema Information
 #
 # Table name: accounts
 #
-#  id              :integer         not null, primary key
-#  account_name    :string(255)
-#  account_contact :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
+#  id            :integer         not null, primary key
+#  account_name  :string(255)
+#  contact_email :string(255)
+#  contact_name  :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 

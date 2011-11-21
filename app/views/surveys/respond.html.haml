@@ -11,10 +11,14 @@
             = f.label response.question.question_text
             -if response.question.question_type == "Rating"
               = f.select(:question_response, %w{Red Amber Green}, {:include_blank => 'Please Select'}) 
-              = f.text_field(:response_explanation)
+              %td.rating-explanation
+                = f.label :response_explanation
+                = f.text_field(:response_explanation)
             -elsif response.question.question_type == "Boolean"
               = f.select(:question_response, %w{Yes No})
-              = f.text_field(:response_explanation)
+              %td.explanation
+                = f.label :response_explanation
+                = f.text_field(:response_explanation)
             -else
               = text_field :response
   =submit_tag

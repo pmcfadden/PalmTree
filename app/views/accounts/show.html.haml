@@ -1,0 +1,19 @@
+%h1
+  =@account.account_name
+
+%table.projects
+  %tr.project-headers
+    %th#project-name-header
+      Project Name
+    %th#project-contact-header
+      Contact Name
+    %th#project-contact-email
+      E-Mail
+  - @account.projects.each do |project|
+    %tr.project
+      %td.project-name
+        =link_to project.project_name, project
+      %td.project-contact
+        =project.contact_name
+      %td.project-contact-email
+        =project.contact_email

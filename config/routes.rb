@@ -6,9 +6,9 @@ PalmTree::Application.routes.draw do
   match 'surveys/:id/respond', :to => 'surveys#respond'
   match 'responses/update_individual', :to => 'responses#update_individual'
   match 'projects/send_email', :to => 'projects#send_email'
-  resources :surveys, :questions, :projects
+  resources :surveys, :questions, :projects, :accounts
 
-  root :to => 'projects#index'
+  root :to => 'accounts#index'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

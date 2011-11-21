@@ -1,0 +1,19 @@
+%h1
+  ThoughtWorks Accounts
+
+%table.accounts
+  %tr.headers
+    %td.account-name-header
+      Account Name
+    %td.account-contact-header
+      Contact Name
+    %td.account-contact-email
+      E-Mail Address
+  -@accounts.each do |account|
+    %tr.account
+      %td.account-name
+        =link_to account.account_name, account
+      %td.account-contact
+        =account.contact_name
+      %td.contact-email
+        =account.contact_email
