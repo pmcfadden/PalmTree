@@ -1,5 +1,4 @@
 PalmTree::Application.routes.draw do
-
   # The priority is based upon order of creation:
   # first created -> highest priority.priority
 
@@ -10,6 +9,10 @@ PalmTree::Application.routes.draw do
     resources :surveys
   end
   resources :questions, :accounts
+
+  resources :templates do
+    post 'apply', :on => :member
+  end
 
   root :to => 'accounts#index'
 
