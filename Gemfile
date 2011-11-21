@@ -29,6 +29,8 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :development do
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'simplecov'

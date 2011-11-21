@@ -6,7 +6,10 @@ PalmTree::Application.routes.draw do
   match 'surveys/:id/respond', :to => 'surveys#respond'
   match 'responses/update_individual', :to => 'responses#update_individual'
   match 'projects/send_email', :to => 'projects#send_email'
-  resources :surveys, :questions, :projects, :accounts
+  resources :projects do
+    resources :surveys
+  end
+  resources :questions, :accounts
 
   root :to => 'accounts#index'
 

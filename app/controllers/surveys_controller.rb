@@ -4,7 +4,8 @@ class SurveysController < ApplicationController
   end
 
   def new
-    @survey = Survey.new
+    @project = Project.find(params[:project_id])
+    @survey = @project.surveys.build
   end
 
   def show
@@ -20,11 +21,11 @@ class SurveysController < ApplicationController
   end
 
   def create
-    date = Date.new(params[:survey["date_of_survey(1i)"]].to_i, params[:survey["date_of_survey(2i)"]].to_i, params[:survey["date_of_survey(3i)"]].to_i)
-    @survey = Survey.new(:date_of_survey => date)
+    @project = Project.find(params[:project_id])
+    @survey = @project.surveys.build(params[:survey])
 
     if @survey.save
-      redirect_to @survey
+      redirect_to @project
     else
       render action: "new"
     end

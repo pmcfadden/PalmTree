@@ -1,18 +1,6 @@
 require 'spec_helper'
 
 describe QuestionsController do
-  def valid_attributes
-    {
-      :question_text => "this is text",
-      :survey_id => 1,
-      :question_type => "Rating"
-    }
-  end
-
-  # This should return the minimal set of attributes required to create a valid
-  # Question. As you add validations to Question, be sure to
-  # update the return value of this method accordingly.
-
   describe "GET index" do
     it "assigns all questions as @questions" do
       question = FactoryGirl.create(:question)
@@ -26,6 +14,15 @@ describe QuestionsController do
       question = FactoryGirl.create(:question)
       get :show, :id => question.id
       assigns(:question).should eq(question)
+    end
+  end
+
+  describe "POST create" do
+    it "should create new question" do
+      survey = FactoryGirl.create(:survey)
+      survey.project = FactoryGirl.create(:project)
+      post :create, :question => FactoryGirl.attributes_for(:question)
+      response.should redirect_to "/projects/1/surveys/1"
     end
   end
 
@@ -48,10 +45,6 @@ describe QuestionsController do
     describe "with valid params" do
       it "updates the requested question" do
         question = FactoryGirl.create(:question)
-        # Assuming there are no other questions in the database, this
-        # specifies that the Question created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         Question.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => question.id, :question => {'these' => 'params'}
       end
@@ -72,7 +65,6 @@ describe QuestionsController do
     describe "with invalid params" do
       it "assigns the question as @question" do
         question = FactoryGirl.create(:question)
-        # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
         put :update, :id => question.id, :question => {}
         assigns(:question).should eq(question)
@@ -80,7 +72,6 @@ describe QuestionsController do
 
       it "re-renders the 'edit' template" do
         question = FactoryGirl.create(:question)
-        # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
         put :update, :id => question.id, :question => {}
         response.should render_template("edit")
