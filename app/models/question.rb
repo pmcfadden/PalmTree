@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :question_text, :survey_id, :question_type
   validates :question_type, :inclusion => {:in => ["Rating", "Free", "Boolean"]}
   has_one :response
-  belongs_to :survey
+  belongs_to :questionable, :polymorphic => true
 end
 
 

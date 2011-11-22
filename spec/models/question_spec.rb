@@ -14,6 +14,18 @@ describe Question do
     @question.should be_valid
   end
 
+  it "should be able to associate to a survey" do
+    @question.questionable = FactoryGirl.build(:survey)
+    @question.should be_valid
+    @question.questionable.should_not be_nil
+  end
+
+  it "should be able to associate to a template" do
+    @question.questionable = FactoryGirl.build(:template)
+    @question.should be_valid
+    @question.questionable.should_not be_nil
+  end
+
   it "should require a survey_id to be valid" do
     @question.survey_id = nil
     @question.should_not be_valid
