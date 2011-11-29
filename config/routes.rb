@@ -9,7 +9,7 @@ PalmTree::Application.routes.draw do
     resources :surveys
       resources :questions
   end
-  resources :accounts, :questions
+  resources :accounts
 
   resources :templates do
     resources :questions

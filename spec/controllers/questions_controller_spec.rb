@@ -1,34 +1,35 @@
 require 'spec_helper'
 
 describe QuestionsController do
+  before(:each) do
+    @template = FactoryGirl.create(:template)
+  end
   describe "GET index" do
     it "assigns all questions for a given template as @questions" do
-      template = FactoryGirl.create(:template)
-      template.questions.create(FactoryGirl.attributes_for(:question))
-      get :index, {:template_id=> template.id}
-      assigns(:questions).should == template.questions
+      @template.questions.create(FactoryGirl.attributes_for(:question))
+      get :index, {:template_id=> @template.id}
+      assigns(:questions).should == @template.questions
     end
   end
 
   describe "GET show" do
     it "assigns the requested question as @question" do
       question = FactoryGirl.create(:question)
-      get :show, :id => question.id
+      get :show, {:id => question.id, :template_id => @template.id}
       assigns(:question).should eq(question)
     end
   end
 
   describe "POST create" do
     it "should create new question" do
-      template = FactoryGirl.create(:template)
-      post :create, {:question => FactoryGirl.attributes_for(:question), :template_id => template.id}
+      post :create, {:question => FactoryGirl.attributes_for(:question), :template_id => @template.id}
       response.should redirect_to "/templates/1"
     end
   end
 
   describe "GET new" do
     it "assigns a new question as @question" do
-      get :new
+      get :new, :template_id => @template.id
       assigns(:question).should be_a_new(Question)
     end
   end
@@ -36,46 +37,8 @@ describe QuestionsController do
   describe "GET edit" do
     it "assigns the requested question as @question" do
       question = FactoryGirl.create(:question)
-      get :edit, :id => question.id
+      get :edit, :id => question.id, :template_id => @template.id
       assigns(:question).should eq(question)
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested question" do
-        question = FactoryGirl.create(:question)
-        Question.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => question.id, :question => {'these' => 'params'}
-      end
-
-      it "assigns the requested question as @question" do
-        question = FactoryGirl.create(:question)
-        put :update, :id => question.id, :question => FactoryGirl.build(:question)
-        assigns(:question).should eq(question)
-      end
-
-      it "redirects to the question" do
-        question = FactoryGirl.create(:question)
-        put :update, :id => question.id, :question => FactoryGirl.build(:question)
-        response.should redirect_to(question)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the question as @question" do
-        question = FactoryGirl.create(:question)
-        Question.any_instance.stub(:save).and_return(false)
-        put :update, :id => question.id, :question => {}
-        assigns(:question).should eq(question)
-      end
-
-      it "re-renders the 'edit' template" do
-        question = FactoryGirl.create(:question)
-        Question.any_instance.stub(:save).and_return(false)
-        put :update, :id => question.id, :question => {}
-        response.should render_template("edit")
-      end
     end
   end
 
@@ -83,14 +46,14 @@ describe QuestionsController do
     it "destroys the requested question" do
       question = FactoryGirl.create(:question)
       expect {
-        delete :destroy, :id => question.id
+        delete :destroy, :id => question.id, :template_id => @template.id
       }.to change(Question, :count).by(-1)
     end
 
     it "redirects to the questions list" do
       question = FactoryGirl.create(:question)
-      delete :destroy, :id => question.id
-      response.should redirect_to(questions_url)
+      delete :destroy, :id => question.id, :template_id => @template.id
+      response.should redirect_to(template_questions_url)
     end
   end
 end

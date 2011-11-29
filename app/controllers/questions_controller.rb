@@ -29,20 +29,10 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def update
-    @question = Question.find(params[:id])
-
-    if @question.update_attributes(params[:question])
-      redirect_to @question, notice: 'Question was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
-
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to questions_url
+    redirect_to template_questions_url
   end
 
   def find_questionable
