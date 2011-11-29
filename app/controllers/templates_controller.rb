@@ -15,7 +15,11 @@ class TemplatesController < ApplicationController
   def apply
     @template = Template.find(params[:id])
     Project.all.each do |project|
-      project.surveys.create(@template.attributes)
+      survey = project.surveys.create(@template.attributes)
+      @template.questions.each do |question|
+        new_question = survey.questions.create(question.attributes)
+        Response.new(:question_id => new_question.id).save
+      end
       project.save
     end
     redirect_to :root

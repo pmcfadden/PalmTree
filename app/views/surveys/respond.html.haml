@@ -5,6 +5,7 @@
   =hidden_field_tag 'survey_id', @survey.project.id
   %table.responses
     - for response in @responses
+      = debugger
       =fields_for "responses[]", response do |f|
         %tr.question_and_response
           %td

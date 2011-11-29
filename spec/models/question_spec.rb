@@ -15,22 +15,30 @@ describe Question do
   end
 
   it "should be able to associate to a survey" do
-    @question.questionable = FactoryGirl.build(:survey)
+    @question.questionable = FactoryGirl.create(:survey)
     @question.should be_valid
     @question.questionable.should_not be_nil
   end
 
   it "should be able to associate to a template" do
-    @question.questionable = FactoryGirl.build(:template)
+    @question.questionable = FactoryGirl.create(:template)
     @question.should be_valid
     @question.questionable.should_not be_nil
   end
 
-  it "should require a survey_id to be valid" do
-    @question.survey_id = nil
+  it "should require a questionable_id to be valid" do
+    @question.questionable_id = nil
     @question.should_not be_valid
 
-    @question.survey_id = 1
+    @question.questionable_id = 1
+    @question.should be_valid
+  end
+
+  it "should require a questionable_type to be valid" do
+    @question.questionable_type = nil
+    @question.should_not be_valid
+
+    @question.questionable_type = "Template"
     @question.should be_valid
   end
 
@@ -65,15 +73,18 @@ describe Question do
 end
 
 
+
 # == Schema Information
 #
 # Table name: questions
 #
-#  id            :integer         not null, primary key
-#  question_text :string(255)
-#  survey_id     :integer
-#  created_at    :datetime
-#  updated_at    :datetime
-#  question_type :string(255)     default("Rating")
+#  id                :integer         not null, primary key
+#  question_text     :string(255)
+#  survey_id         :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#  question_type     :string(255)     default("Rating")
+#  questionable_id   :integer
+#  questionable_type :string(255)
 #
 

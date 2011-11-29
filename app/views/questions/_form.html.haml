@@ -1,4 +1,4 @@
-= form_for(@question) do |f|
+= form_for [@questionable, Question.new] do |f|
   - if @question.errors.any?
     %div#error_explanation
       %h2
@@ -14,7 +14,5 @@
     = f.label :question_text
     = f.text_field :question_text
     = f.select("question_type", {"Red Yellow Green Rating" => "Rating", "Yes or No" => "Boolean", "Free Response" => "Free"})
-
-  = hidden_field(:question, :survey_id, :value => "#{params[:id]}")
   %div.actions
     = f.submit

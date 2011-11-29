@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe QuestionsController do
   describe "GET index" do
-    it "assigns all questions as @questions" do
-      question = FactoryGirl.create(:question)
-      get :index
-      assigns(:questions).should eq([question])
+    it "assigns all questions for a given template as @questions" do
+      template = FactoryGirl.create(:template)
+      template.questions.create(FactoryGirl.attributes_for(:question))
+      get :index, {:template_id=> template.id}
+      assigns(:questions).should == template.questions
     end
   end
 
@@ -19,10 +20,9 @@ describe QuestionsController do
 
   describe "POST create" do
     it "should create new question" do
-      survey = FactoryGirl.create(:survey)
-      survey.project = FactoryGirl.create(:project)
-      post :create, :question => FactoryGirl.attributes_for(:question)
-      response.should redirect_to "/projects/1/surveys/1"
+      template = FactoryGirl.create(:template)
+      post :create, {:question => FactoryGirl.attributes_for(:question), :template_id => template.id}
+      response.should redirect_to "/templates/1"
     end
   end
 
@@ -93,5 +93,4 @@ describe QuestionsController do
       response.should redirect_to(questions_url)
     end
   end
-
 end

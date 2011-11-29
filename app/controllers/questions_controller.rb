@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all
+    @questionable = find_questionable
+    @questions = []
+    @questions = @questionable.questions
   end
 
   def show
@@ -8,6 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    @questionable = find_questionable
     @question = Question.new
   end
 
@@ -16,13 +19,14 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(params[:question])
-    survey = Survey.find(@question.survey_id)
+    @questionable = find_questionable
+    @question = @questionable.questions.build(params[:question])
     if @question.save
       @response = Response.new(:question_id => @question.id)
       @response.save
+      redirect_to @questionable
+    else render action: 'new'
     end
-    redirect_to [survey.project, survey]
   end
 
   def update
@@ -39,5 +43,14 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.destroy
     redirect_to questions_url
+  end
+
+  def find_questionable
+    params.each do |name, value|
+    if name =~ /(.+)_id$/
+      return $1.classify.constantize.find(value)
+    end
+  end
+  nil
   end
 end

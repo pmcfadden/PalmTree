@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   validates :project_name, :contact_name, :presence => true
   validates :contact_email, :presence => true, :email => true
   belongs_to :account
-  has_many :surveys
+  has_many :surveys, :order => 'date_of_survey'
 end
 
 

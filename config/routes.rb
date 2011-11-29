@@ -7,10 +7,12 @@ PalmTree::Application.routes.draw do
   match 'projects/send_email', :to => 'projects#send_email'
   resources :projects do
     resources :surveys
+      resources :questions
   end
-  resources :questions, :accounts
+  resources :accounts, :questions
 
   resources :templates do
+    resources :questions
     post 'apply', :on => :member
   end
 

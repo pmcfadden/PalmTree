@@ -1,2 +1,9 @@
 =form_for(@template, :method => :post, :url => apply_template_path(@template)) do |f|
+  %ul
+    - @template.questions.each do |question|
+      %li= question.question_text
+      %br
+  %br
   = f.submit "Apply Template"
+
+= link_to "Add Question", new_template_question_path(@template)
