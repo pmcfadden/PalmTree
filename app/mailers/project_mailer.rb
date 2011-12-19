@@ -3,6 +3,6 @@ class ProjectMailer < ActionMailer::Base
 
   def survey_email(project)
     @project = project
-    mail(:to => @project.contact_email, :subject => "Delivery Status Update")
+    mail(:to => @project.account.contact_email, :subject => "Delivery Status Update")
   end
 end
